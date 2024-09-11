@@ -178,15 +178,24 @@ export const omit = <T, TKeys extends keyof T>(
 
 export const get = <T, K>(
   value: T,
-  getter: (t: T) => K,
+  path: String,
   defaultValue: K | null = null
 ) => {
-  try {
-    return getter(value) ?? defaultValue
-  } catch {
-    return defaultValue
+  const segments = path.split(/[\.\[\]]/g);
+  let current = value;
+  for (const key of segments) {
+    if (current === null)
+      return defaultValue;
+    if (current === void 0)
+      return defaultValue;
+    if (key.trim() === "")
+      continue;
+    current = current[key];
   }
-}
+  if (current === void 0)
+    return defaultValue;
+  return current;
+};
 
 /**
  * Zip two objects together recursivly into a new
