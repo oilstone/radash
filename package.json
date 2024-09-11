@@ -1,5 +1,5 @@
 {
-  "name": "radash",
+  "name": "@oilstone/radash-v7",
   "version": "7.1.0",
   "description": "Functional utility library - modern, simple, typed, powerful",
   "main": "dist/index.js",
